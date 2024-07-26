@@ -3,15 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\GroupsRequest;
+use Illuminate\Support\Facades\Validator;
+use App\Services\Interfaces\GroupsServiceInterface;
 
 class GroupsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    protected $groupsService;
+    public function __construct(GroupsServiceInterface $groupsService)
+    {
+        $this->groupsService = $groupsService;
+    }
     public function index()
     {
-        return view('groups.index');
+        $groups = $this->groupsService->all();
+        return view('groups.index', compact('groups'));
     }
 
     /**
@@ -19,7 +28,6 @@ class GroupsController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -27,7 +35,29 @@ class GroupsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $validator = Validator::make(
+            $input,
+            [
+                'group_name' => "required | unique:groups,group_name",
+            ],
+            [
+                'group_name.required' => "Group name must be required",
+                'group_name.unique' => "Group name must be unique"
+            ]
+        );
+        if ($validator->fails()) {
+            $arr = [
+                'success' => false,
+                'data' => $validator->errors()
+            ];
+            return $arr;
+        }
+        return
+            [
+                'success' => true,
+                'data' => $this->groupsService->create($request->all())
+            ];
     }
 
     /**
@@ -35,7 +65,8 @@ class GroupsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $group = $this->groupsService->find($id);
+        return view('groups.detail', compact('group'));
     }
 
     /**
@@ -51,7 +82,8 @@ class GroupsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return $this->groupsService->update($id, $request->all());
+
     }
 
     /**
@@ -59,6 +91,6 @@ class GroupsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return $this->groupsService->delete($id);
     }
 }

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/variables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.min.css') }}">
+
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/favicon.png') }}">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.0/css/line.css">
 </head>
@@ -29,7 +30,7 @@
         <nav class="navbar navbar-light">
             <div class="navbar-left">
                 <div class="logo-area">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="{{ route('admin.index') }}">
                         <img class="dark" src="{{ asset('assets/img/') }}/logo-dark.png" alt="logo">
                         <img class="light" src="{{ asset('assets/img/') }}/logo-white.png" alt="logo">
                     </a>
@@ -635,7 +636,7 @@
                                                     Details</a>
                                             </li>
                                             <li>
-                                                <a href="course.html" class="">Course</a>
+                                                <a href="course.html" class="">Courses</a>
                                             </li>
                                             <li>
                                                 <a href="course-details.html" class="">Course
@@ -1172,7 +1173,7 @@
                                                 class="rounded-circle">
                                         </div>
                                         <div>
-                                            <h6>{{Auth::user()->name}}</h6>
+                                            <h6>{{ Auth::user()->name }}</h6>
                                         </div>
                                     </div>
                                     <div class="nav-author__options">
@@ -1199,7 +1200,7 @@
                                                     <i class="uil uil-bell"></i> Help</a>
                                             </li>
                                         </ul>
-                                        <a href="{{route('logout')}}" class="nav-author__signout">
+                                        <a href="{{ route('logout') }}" class="nav-author__signout">
                                             <i class="uil uil-sign-out-alt"></i> Sign Out</a>
                                     </div>
                                 </div>
@@ -1229,13 +1230,7 @@
             <div class="sidebar sidebar-collapse" id="sidebar">
                 <div class="sidebar__menu-group">
                     <ul class="sidebar_nav">
-                        <li class="has-child open">
-                            <a href="#" class="active">
-                                <span class="nav-icon uil uil-create-dashboard"></span>
-                                <span class="menu-text">Dashboard</span>
-                            </a>
 
-                        </li>
 
                         <li class="menu-title mt-30">
                             <span>Applications</span>
@@ -1249,11 +1244,11 @@
                             </a>
                             <ul>
                                 <li class="">
-                                    <a href="{{ route('groups.index') }}">Groups</a>
+                                    <a href="{{ route('admin.groups.index') }}">Groups</a>
                                 </li>
 
                                 <li class="">
-                                    <a href="users-list.html">Users
+                                    <a href="{{ route('admin.users.index') }}">Users
                                         List</a>
                                 </li>
                             </ul>
@@ -1266,11 +1261,13 @@
                             </a>
                             <ul>
                                 <li class="">
-                                    <a href="course.html">Course</a>
+                                    <a href="{{ route('admin.categories.index') }}">Categories</a>
                                 </li>
                                 <li class="">
-                                    <a href="course-details.html">Course
-                                        Details</a>
+                                    <a href="{{ route('admin.courses.index') }}">Courses</a>
+                                </li>
+                                <li class="">
+                                    <a href="{{ route('admin.courses.create') }}">Create Course</a>
                                 </li>
                             </ul>
                         </li>
@@ -1314,8 +1311,8 @@
         </footer>
     </main>
     <div id="overlayer">
-        <div class="loader-overlay">
-            <div class="dm-spin-dots spin-lg">
+        <div class="loader-overlay ">
+            <div class="dm-spin-dots spin-lg ">
                 <span class="spin-dot badge-dot dot-primary"></span>
                 <span class="spin-dot badge-dot dot-primary"></span>
                 <span class="spin-dot badge-dot dot-primary"></span>
@@ -1325,18 +1322,70 @@
     </div>
     <div class="overlay-dark-sidebar"></div>
     <div class="customizer-overlay"></div>
+    <div class="button-group flex-wrap d-none">
+
+        <button class="btn btn-outline-lighten btn-outline-lighten__height fw-400 btn-toast button-success"
+            data-toasttype="success" data-toasticon="check-circle">Success</button>
+
+        <button class="btn btn-outline-lighten btn-outline-lighten__height fw-400 btn-toast button-warning"
+            data-toasttype="warning" data-toasticon="exclamation-circle">Warning</button>
+    </div>
+    <div class="notification-wrapper bottom-right"></div>
     <script>
         var env = {
             iconLoaderUrl: "{{ asset('assets/js/json/icons.json') }}",
             googleMarkerUrl: "{{ asset('assets/img/markar-icon.png') }}",
             editorIconUrl: "{{ asset('assets/img/ui/icons.svg') }}",
             mapClockIcon: "{{ asset('assets/img/svg/clock-ticket1.sv') }}g"
-        }
+        };
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDduF2tLXicDEPDMAtC6-NLOekX0A5vlnY"></script>
     <script src="{{ asset('assets/js/plugins.min.js') }}"></script>
     <script src="{{ asset('assets/js/script.min.js') }}"></script>
     <script src="{{ asset('js/app.min.js') }}"></script>
+    <script src="https://kit.fontawesome.com/dc265cc9f9.js" crossorigin="anonymous"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 </body>
+<script>
+    let btnSuccess = document.querySelector('.button-success');
+    let btnWarning = document.querySelector('.button-warning');
+
+    function formatNumber(num) {
+        return num.toLocaleString();
+    }
+
+    function slugify(str) {
+        const accentsMap = {
+            'a': 'áàạảãâấầậẩẫăắằặẳẵ',
+            'A': 'ÁÀẠẢÃÂẤẦẬẨẪĂẮẰẶẲẴ',
+            'e': 'éèẹẻẽêếềệểễ',
+            'E': 'ÉÈẸẺẼÊẾỀỆỂỄ',
+            'i': 'íìịỉĩ',
+            'I': 'ÍÌỊỈĨ',
+            'o': 'óòọỏõôốồộổỗơớờợởỡ',
+            'O': 'ÓÒỌỎÕÔỐỒỘỔỖƠỚỜỢỞỠ',
+            'u': 'úùụủũưứừựửữ',
+            'U': 'ÚÙỤỦŨƯỨỪỰỬỮ',
+            'y': 'ýỳỵỷỹ',
+            'Y': 'ÝỲỴỶỸ',
+            'd': 'đ',
+            'D': 'Đ'
+        };
+
+        for (let key in accentsMap) {
+            const accents = accentsMap[key];
+            for (let i = 0; i < accents.length; i++) {
+                str = str.replace(new RegExp(accents[i], 'g'), key);
+            }
+        }
+
+        return str.toLowerCase() // Chuyển thành chữ thường
+            .replace(/[^a-z0-9\s-]/g, '') // Loại bỏ các ký tự không phải chữ cái, số và dấu cách
+            .replace(/\s+/g, '-') // Thay thế các khoảng trắng bằng dấu gạch ngang
+            .replace(/-+/g, '-') // Thay thế nhiều dấu gạch ngang liên tiếp bằng một dấu gạch ngang
+            .replace(/^-+|-+$/g, ''); // Loại bỏ dấu gạch ngang ở đầu và cuối
+    }
+</script>
+@stack('scripts')
 
 </html>

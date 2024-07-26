@@ -6,8 +6,8 @@
                 <div class="breadcrumb-main user-member justify-content-sm-between ">
                     <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
                         <div class="d-flex align-items-center user-member__title justify-content-center me-sm-25">
-                            <h4 class="text-capitalize fw-500 breadcrumb-title">{{ trans('menu.user-group') }}</h4>
-                            <span class="sub-title ms-sm-25 ps-sm-25">Home</span>
+                            <h4 class="text-capitalize fw-500 breadcrumb-title">Groups</h4>
+                            <span class="sub-title ms-sm-25 ps-sm-25"></span>
                         </div>
 
                         <form action="/" class="d-flex align-items-center user-member__form my-sm-0 my-2">
@@ -19,141 +19,39 @@
                     </div>
                     <div class="action-btn">
                         <a href="#" class="btn px-15 btn-primary" data-bs-toggle="modal" data-bs-target="#new-member">
-                            <i class="las la-plus fs-16"></i>Add New Member</a>
+                            <i class="las la-plus fs-16"></i>Create New Group</a>
                         <div class="modal fade new-member" id="new-member" role="dialog" tabindex="-1"
                             aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content  radius-xl">
                                     <div class="modal-header">
-                                        <h6 class="modal-title fw-500" id="staticBackdropLabel">Create project</h6>
+                                        <h6 class="modal-title fw-500" id="staticBackdropLabel">Create group</h6>
                                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                             <i class="uil uil-times"></i>
                                         </button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="new-member-modal">
-                                            <form>
-                                                <div class="form-group mb-20">
-                                                    <input type="text" class="form-control" placeholder="Duran Clayton">
+
+
+                                            <div class="mb-25">
+                                                <div class="form-group mb-10">
+                                                    <label for="name47">group name</label>
+                                                    <input type="text" class="form-control name-group" id="name47"
+                                                        placeholder="Enter group name here...">
                                                 </div>
-                                                <div class="form-group mb-20">
-                                                    <div class="category-member">
-                                                        <select class="js-example-basic-single js-states form-control"
-                                                            id="category-member">
-                                                            <option value="JAN">1</option>
-                                                            <option value="FBR">2</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group mb-20">
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Project description"></textarea>
-                                                </div>
-                                                <div class="form-group textarea-group">
-                                                    <label class="mb-15">status</label>
-                                                    <div class="d-flex">
-                                                        <div class="project-task-list__left d-flex align-items-center">
-                                                            <div class="checkbox-group d-flex me-50 pe-10">
-                                                                <div
-                                                                    class="checkbox-theme-default custom-checkbox checkbox-group__single d-flex">
-                                                                    <input class="checkbox" type="checkbox" id="check-grp-1"
-                                                                        checked>
-                                                                    <label for="check-grp-1"
-                                                                        class="fs-14 color-light strikethrough">
-                                                                        status
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="checkbox-group d-flex me-50 pe-10">
-                                                                <div
-                                                                    class="checkbox-theme-default custom-checkbox checkbox-group__single d-flex">
-                                                                    <input class="checkbox" type="checkbox"
-                                                                        id="check-grp-2">
-                                                                    <label for="check-grp-2"
-                                                                        class="fs-14 color-light strikethrough">
-                                                                        Deactivated
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="checkbox-group d-flex">
-                                                                <div
-                                                                    class="checkbox-theme-default custom-checkbox checkbox-group__single d-flex">
-                                                                    <input class="checkbox" type="checkbox"
-                                                                        id="check-grp-3">
-                                                                    <label for="check-grp-3"
-                                                                        class="fs-14 color-light strikethrough">
-                                                                        bloked
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-25">
-                                                    <div class="form-group mb-10">
-                                                        <label for="name47">project member</label>
-                                                        <input type="text" class="form-control" id="name47"
-                                                            placeholder="Search members">
-                                                    </div>
-                                                    <ul class="d-flex flex-wrap mb-20 user-group-people__parent">
-                                                        <li>
-                                                            <a href="#"><img class="rounded-circle wh-34"
-                                                                    src="{{ asset('assets/img/tm1.png') }}"
-                                                                    alt="author"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><img class="rounded-circle wh-34"
-                                                                    src="{{ asset('assets/img/tm2.png') }}"
-                                                                    alt="author"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><img class="rounded-circle wh-34"
-                                                                    src="{{ asset('assets/img/tm3.png') }}"
-                                                                    alt="author"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><img class="rounded-circle wh-34"
-                                                                    src="{{ asset('assets/img/tm4.png') }}"
-                                                                    alt="author"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><img class="rounded-circle wh-34"
-                                                                    src="{{ asset('assets/img/tm5.png') }}"
-                                                                    alt="author"></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="d-flex new-member-calendar">
-                                                    <div class="form-group w-100 me-sm-15 form-group-calender">
-                                                        <label for="datepicker">start Date</label>
-                                                        <div class="position-relative">
-                                                            <input type="text" class="form-control" id="datepicker"
-                                                                placeholder="mm/dd/yyyy">
-                                                            <a href="#">
-                                                                <img src="{{ asset('assets/img/svg/calendar.svg') }}"
-                                                                    alt="calendar" class="svg"></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group w-100 form-group-calender">
-                                                        <label for="datepicker2">End Date</label>
-                                                        <div class="position-relative">
-                                                            <input type="text" class="form-control" id="datepicker2"
-                                                                placeholder="mm/dd/yyyy">
-                                                            <a href="#">
-                                                                <img src="{{ asset('assets/img/svg/calendar.svg') }}"
-                                                                    alt="calendar" class="svg"></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="button-group d-flex pt-25">
-                                                    <button
-                                                        class="btn btn-primary btn-default btn-squared text-capitalize">add
-                                                        new project
-                                                    </button>
-                                                    <button
-                                                        class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">cancel
-                                                    </button>
-                                                </div>
-                                            </form>
+                                                <p class="text-danger validate-add-group"></p>
+                                            </div>
+
+                                            <div class="button-group d-flex pt-25">
+                                                <button
+                                                    class="btn btn-primary btn-default btn-squared text-capitalize add-group">Create
+                                                </button>
+                                                <button data-bs-dismiss="modal" aria-label="Close"
+                                                    class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">cancel
+                                                </button>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -165,567 +63,300 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xxl-4 col-md-6 mb-25">
-                <div class="user-group px-30 pt-30 pb-25 radius-xl bg-white">
-                    <div class="border-bottom">
-                        <div class="media user-group-media d-flex justify-content-between">
-                            <div class="media-body d-flex align-items-center">
-                                <img class="me-20 wh-70 rounded-circle bg-opacity-primary"
-                                    src="{{ asset('assets/img/ugl1.png') }}" alt="author">
-                                <div>
-                                    <a href="application-ui.html">
-                                        <h6 class="mt-0  fw-500">Dashboard UI</h6>
-                                    </a>
-                                    <p class="fs-13 color-light mb-0">San Francisco, CA</p>
+            @foreach ($groups as $group)
+                <div class="col-xxl-4 col-md-6 mb-25">
+                    <div class="user-group px-30 pt-30 pb-25 radius-xl bg-white">
+                        <div class="border-bottom">
+                            <div class="media user-group-media d-flex justify-content-between">
+                                <div class="media-body d-flex align-items-center">
+                                    <img class="me-20 wh-70 rounded-circle bg-opacity-primary"
+                                        src="{{ asset('assets/img/ugl1.png') }}" alt="author">
+                                    <div>
+                                        <a>
+                                            <h6 class="mt-0  fw-500">{{ $group->group_name }}
+                                                @if ($group->deleted_at)
+                                                    <span class="dm-tag tag-danger tag-transparented">Deactivated</span>
+                                                @else
+                                                    <span class="dm-tag tag-success tag-transparented">Active</span>
+                                                @endif
+                                            </h6>
+
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="mt-n15">
-                                <div class="dropdown dropdown-click">
-                                    <button class="btn-link border-0 bg-transparent p-0" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <img src="{{ asset('assets/img/svg/more-horizontal.svg') }}"
-                                            alt="more-horizontal" class="svg">
-                                    </button>
-                                    <div class="dropdown-default dropdown-bottomLeft dropdown-menu-right dropdown-menu">
-                                        <a class="dropdown-item" href="#">view</a>
-                                        <a class="dropdown-item" href="#">edit</a>
-                                        <a class="dropdown-item" href="#">leave</a>
-                                        <a class="dropdown-item" href="#">delete</a>
+                                <div class="mt-n15">
+                                    <div class="dropdown dropdown-click">
+                                        <button class="btn-link border-0 bg-transparent p-0" data-bs-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <img src="{{ asset('assets/img/svg/more-horizontal.svg') }}"
+                                                alt="more-horizontal" class="svg">
+                                        </button>
+                                        <div class="dropdown-default dropdown-bottomLeft dropdown-menu-right dropdown-menu">
+
+                                            <a href="#" class="dropdown-item edit-groups-{{ $group->id }}"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#edit_groups_{{ $group->group_name }}"
+                                                data-id="{{ $group->id }}">
+                                                edit</a>
+                                            <a type="button" class="dropdown-item" data-bs-toggle="modal"
+                                                data-bs-target="#modal-info-delete-group-{{ $group->id }}">Delete</a>
+
+                                            <a class="dropdown-item" href="#">authorization</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="user-group-people">
-                            <p class="mt-15">Lorem ipsum dolor amet, consetetur sadipscing elitr sed diam nonumy eirmod
-                                dolor ame.</p>
-                            <ul class="d-flex flex-wrap mb-20 user-group-people__parent">
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm1.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm2.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm3.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm4.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm5.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm6.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm1.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm2.png') }}" alt="author"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="user-group-project">
-                        <div class="d-flex justify-content-between user-group-progress-top">
-                            <div>
-                                <span class="color-light fs-12">Current project</span>
-                                <p class="fs-14 fw-500 color-dark mb-0">Plugin Development</p>
-                            </div>
-                            <div>
-                                <span class="color-light fs-12">Project Completed</span>
-                                <p class="fs-16 fw-500 color-success mb-0 text-end">45</p>
+                            <div class="user-group-people">
+
+                                <ul class="d-flex flex-wrap mb-20 user-group-people__parent mt-15">
+                                    <li>
+                                        <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
+                                                src="{{ asset('assets/img/tm1.png') }}" alt="author"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
+                                                src="{{ asset('assets/img/tm2.png') }}" alt="author"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
+                                                src="{{ asset('assets/img/tm3.png') }}" alt="author"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
+                                                src="{{ asset('assets/img/tm4.png') }}" alt="author"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
+                                                src="{{ asset('assets/img/tm5.png') }}" alt="author"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
+                                                src="{{ asset('assets/img/tm6.png') }}" alt="author"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
+                                                src="{{ asset('assets/img/tm1.png') }}" alt="author"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
+                                                src="{{ asset('assets/img/tm2.png') }}" alt="author"></a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="user-group-progress-bar">
-                            <div class="progress-wrap d-flex align-items-center ">
-                                <div class="progress">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 30%;"
-                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <span class="progress-percentage">30%</span>
-                            </div>
-                            <p class="color-light fs-12 mb-0">12 / 15 tasks completed</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-4 col-md-6 mb-25">
-                <div class="user-group px-30 pt-30 pb-25 radius-xl bg-white">
-                    <div class="border-bottom">
-                        <div class="media user-group-media d-flex justify-content-between">
-                            <div class="media-body d-flex align-items-center">
-                                <img class="me-20 wh-70 rounded-circle bg-opacity-primary"
-                                    src="{{ asset('assets/img/ugl2.png') }}" alt="author">
+                        <div class="user-group-project">
+                            <div class="d-flex justify-content-between user-group-progress-top">
                                 <div>
-                                    <a href="application-ui.html">
-                                        <h6 class="mt-0  fw-500">Dashboard UI</h6>
-                                    </a>
-                                    <p class="fs-13 color-light mb-0">San Francisco, CA</p>
+
                                 </div>
-                            </div>
-                            <div class="mt-n15">
-                                <div class="dropdown dropdown-click">
-                                    <button class="btn-link border-0 bg-transparent p-0" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <img src="{{ asset('assets/img/svg/more-horizontal.svg') }}"
-                                            alt="more-horizontal" class="svg">
-                                    </button>
-                                    <div class="dropdown-default dropdown-bottomLeft dropdown-menu-right dropdown-menu">
-                                        <a class="dropdown-item" href="#">view</a>
-                                        <a class="dropdown-item" href="#">edit</a>
-                                        <a class="dropdown-item" href="#">leave</a>
-                                        <a class="dropdown-item" href="#">delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="user-group-people">
-                            <p class="mt-15">Lorem ipsum dolor amet, consetetur sadipscing elitr sed diam nonumy eirmod
-                                dolor ame.</p>
-                            <ul class="d-flex flex-wrap mb-20 user-group-people__parent">
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm1.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm2.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm3.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm4.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm5.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm6.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm1.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm2.png') }}" alt="author"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="user-group-project">
-                        <div class="d-flex justify-content-between user-group-progress-top">
-                            <div>
-                                <span class="color-light fs-12">Current project</span>
-                                <p class="fs-14 fw-500 color-dark mb-0">Plugin Development</p>
-                            </div>
-                            <div>
-                                <span class="color-light fs-12">Project Completed</span>
-                                <p class="fs-16 fw-500 color-success mb-0 text-end">45</p>
-                            </div>
-                        </div>
-                        <div class="user-group-progress-bar">
-                            <div class="progress-wrap d-flex align-items-center ">
-                                <div class="progress">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 30%;"
-                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <span class="progress-percentage">30%</span>
-                            </div>
-                            <p class="color-light fs-12 mb-0">12 / 15 tasks completed</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-4 col-md-6 mb-25">
-                <div class="user-group px-30 pt-30 pb-25 radius-xl bg-white">
-                    <div class="border-bottom">
-                        <div class="media user-group-media d-flex justify-content-between">
-                            <div class="media-body d-flex align-items-center">
-                                <img class="me-20 wh-70 rounded-circle bg-opacity-primary"
-                                    src="{{ asset('assets/img/ugl3.png') }}" alt="author">
                                 <div>
-                                    <a href="application-ui.html">
-                                        <h6 class="mt-0  fw-500">Dashboard UI</h6>
-                                    </a>
-                                    <p class="fs-13 color-light mb-0">San Francisco, CA</p>
+                                    <span class="color-light fs-12">Members</span>
+                                    <p class="fs-16 fw-500 color-success mb-0 text-end">45</p>
                                 </div>
                             </div>
-                            <div class="mt-n15">
-                                <div class="dropdown dropdown-click">
-                                    <button class="btn-link border-0 bg-transparent p-0" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <img src="{{ asset('assets/img/svg/more-horizontal.svg') }}"
-                                            alt="more-horizontal" class="svg">
-                                    </button>
-                                    <div class="dropdown-default dropdown-bottomLeft dropdown-menu-right dropdown-menu">
-                                        <a class="dropdown-item" href="#">view</a>
-                                        <a class="dropdown-item" href="#">edit</a>
-                                        <a class="dropdown-item" href="#">leave</a>
-                                        <a class="dropdown-item" href="#">delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="user-group-people">
-                            <p class="mt-15">Lorem ipsum dolor amet, consetetur sadipscing elitr sed diam nonumy eirmod
-                                dolor ame.</p>
-                            <ul class="d-flex flex-wrap mb-20 user-group-people__parent">
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm1.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm2.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm3.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm4.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm5.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm6.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm1.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm2.png') }}" alt="author"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="user-group-project">
-                        <div class="d-flex justify-content-between user-group-progress-top">
-                            <div>
-                                <span class="color-light fs-12">Current project</span>
-                                <p class="fs-14 fw-500 color-dark mb-0">Plugin Development</p>
-                            </div>
-                            <div>
-                                <span class="color-light fs-12">Project Completed</span>
-                                <p class="fs-16 fw-500 color-success mb-0 text-end">45</p>
-                            </div>
-                        </div>
-                        <div class="user-group-progress-bar">
-                            <div class="progress-wrap d-flex align-items-center ">
-                                <div class="progress">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 30%;"
-                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <span class="progress-percentage">30%</span>
-                            </div>
-                            <p class="color-light fs-12 mb-0">12 / 15 tasks completed</p>
+
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xxl-4 col-md-6 mb-25">
-                <div class="user-group px-30 pt-30 pb-25 radius-xl bg-white">
-                    <div class="border-bottom">
-                        <div class="media user-group-media d-flex justify-content-between">
-                            <div class="media-body d-flex align-items-center">
-                                <img class="me-20 wh-70 rounded-circle bg-opacity-primary"
-                                    src="{{ asset('assets/img/ugl4.png') }}" alt="author">
-                                <div>
-                                    <a href="application-ui.html">
-                                        <h6 class="mt-0  fw-500">Dashboard UI</h6>
-                                    </a>
-                                    <p class="fs-13 color-light mb-0">San Francisco, CA</p>
-                                </div>
+
+                {{-- Modal Edit --}}
+                <div class="modal fade new-member" id="edit_groups_{{ $group->group_name }}" role="dialog"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content  radius-xl">
+                            <div class="modal-header">
+                                <h6 class="modal-title fw-500" id="staticBackdropLabel">
+                                    Edit Group - {{ $group->group_name }}</h6>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <i class="uil uil-times"></i>
+                                </button>
                             </div>
-                            <div class="mt-n15">
-                                <div class="dropdown dropdown-click">
-                                    <button class="btn-link border-0 bg-transparent p-0" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <img src="{{ asset('assets/img/svg/more-horizontal.svg') }}"
-                                            alt="more-horizontal" class="svg">
-                                    </button>
-                                    <div class="dropdown-default dropdown-bottomLeft dropdown-menu-right dropdown-menu">
-                                        <a class="dropdown-item" href="#">view</a>
-                                        <a class="dropdown-item" href="#">edit</a>
-                                        <a class="dropdown-item" href="#">leave</a>
-                                        <a class="dropdown-item" href="#">delete</a>
+                            <div class="modal-body">
+                                <div class="new-member-modal">
+
+
+                                    <div class="mb-25">
+                                        <div class="form-group mb-10">
+                                            <label for="">Group name</label>
+                                            <input type="text" class="form-control name-group-{{ $group->id }}"
+                                                id="" value="{{ $group->group_name }}">
+                                        </div>
+                                        <p class="text-danger validate-group-{{ $group->id }}"></p>
+
                                     </div>
+                                    <div class="form-group textarea-group">
+                                        <label class="mb-15">status</label>
+                                        <div class="d-flex">
+                                            <div class="radio-horizontal-list d-flex">
+                                                <div class="radio-theme-default custom-radio ">
+                                                    <input class="radio radio-active" type="radio"
+                                                        name="radio-optional-group-{{ $group->id }}" value="1"
+                                                        id="radio-{{ $group->group_name }}-hl1"
+                                                        {{ $group->deleted_at ? '' : 'checked' }}>
+                                                    <label for="radio-{{ $group->group_name }}-hl1">
+                                                        <span class="radio-text">Active</span>
+                                                    </label>
+                                                </div>
+                                                <div class="radio-theme-default custom-radio ">
+                                                    <input class="radio radio-deactivated" type="radio"
+                                                        name="radio-optional-group-{{ $group->id }}" value="0"
+                                                        id="radio-{{ $group->group_name }}-hl2"
+                                                        {{ $group->deleted_at ? 'checked' : '' }}>
+                                                    <label for="radio-{{ $group->group_name }}-hl2">
+                                                        <span class="radio-text">Deactivated</span>
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="button-group d-flex pt-25">
+                                        <a class="btn btn-primary btn-default btn-squared text-capitalize update_group"
+                                            data-id="{{ $group->id }}">Update
+                                        </a>
+                                        <a data-bs-dismiss="modal" aria-label="Close"
+                                            class=" close btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">Cancel
+                                        </a>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
-                        <div class="user-group-people">
-                            <p class="mt-15">Lorem ipsum dolor amet, consetetur sadipscing elitr sed diam nonumy eirmod
-                                dolor ame.</p>
-                            <ul class="d-flex flex-wrap mb-20 user-group-people__parent">
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm1.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm2.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm3.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm4.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm5.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm6.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm1.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm2.png') }}" alt="author"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="user-group-project">
-                        <div class="d-flex justify-content-between user-group-progress-top">
-                            <div>
-                                <span class="color-light fs-12">Current project</span>
-                                <p class="fs-14 fw-500 color-dark mb-0">Plugin Development</p>
-                            </div>
-                            <div>
-                                <span class="color-light fs-12">Project Completed</span>
-                                <p class="fs-16 fw-500 color-success mb-0 text-end">45</p>
-                            </div>
-                        </div>
-                        <div class="user-group-progress-bar">
-                            <div class="progress-wrap d-flex align-items-center ">
-                                <div class="progress">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 30%;"
-                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <span class="progress-percentage">30%</span>
-                            </div>
-                            <p class="color-light fs-12 mb-0">12 / 15 tasks completed</p>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xxl-4 col-md-6 mb-25">
-                <div class="user-group px-30 pt-30 pb-25 radius-xl bg-white">
-                    <div class="border-bottom">
-                        <div class="media user-group-media d-flex justify-content-between">
-                            <div class="media-body d-flex align-items-center">
-                                <img class="me-20 wh-70 rounded-circle bg-opacity-primary"
-                                    src="{{ asset('assets/img/ugl5.png') }}" alt="author">
-                                <div>
-                                    <a href="application-ui.html">
-                                        <h6 class="mt-0  fw-500">Dashboard UI</h6>
-                                    </a>
-                                    <p class="fs-13 color-light mb-0">San Francisco, CA</p>
-                                </div>
-                            </div>
-                            <div class="mt-n15">
-                                <div class="dropdown dropdown-click">
-                                    <button class="btn-link border-0 bg-transparent p-0" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <img src="{{ asset('assets/img/svg/more-horizontal.svg') }}"
-                                            alt="more-horizontal" class="svg">
-                                    </button>
-                                    <div class="dropdown-default dropdown-bottomLeft dropdown-menu-right dropdown-menu">
-                                        <a class="dropdown-item" href="#">view</a>
-                                        <a class="dropdown-item" href="#">edit</a>
-                                        <a class="dropdown-item" href="#">leave</a>
-                                        <a class="dropdown-item" href="#">delete</a>
+
+                {{-- Modal Delete  --}}
+                <div class="modal-info-delete modal fade show" id="modal-info-delete-group-{{ $group->id }}"
+                    tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm modal-info" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="modal-info-body d-flex">
+                                    <div class="modal-info-icon warning">
+                                        <img src="{{ asset('assets/img/svg/alert-circle.svg') }} " alt="alert-circle"
+                                            class="svg">
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="user-group-people">
-                            <p class="mt-15">Lorem ipsum dolor amet, consetetur sadipscing elitr sed diam nonumy eirmod
-                                dolor ame.</p>
-                            <ul class="d-flex flex-wrap mb-20 user-group-people__parent">
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm1.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm2.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm3.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm4.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm5.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm6.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm1.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm2.png') }}" alt="author"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="user-group-project">
-                        <div class="d-flex justify-content-between user-group-progress-top">
-                            <div>
-                                <span class="color-light fs-12">Current project</span>
-                                <p class="fs-14 fw-500 color-dark mb-0">Plugin Development</p>
-                            </div>
-                            <div>
-                                <span class="color-light fs-12">Project Completed</span>
-                                <p class="fs-16 fw-500 color-success mb-0 text-end">45</p>
-                            </div>
-                        </div>
-                        <div class="user-group-progress-bar">
-                            <div class="progress-wrap d-flex align-items-center ">
-                                <div class="progress">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 30%;"
-                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <span class="progress-percentage">30%</span>
-                            </div>
-                            <p class="color-light fs-12 mb-0">12 / 15 tasks completed</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-4 col-md-6 mb-25">
-                <div class="user-group px-30 pt-30 pb-25 radius-xl bg-white">
-                    <div class="border-bottom">
-                        <div class="media user-group-media d-flex justify-content-between">
-                            <div class="media-body d-flex align-items-center">
-                                <img class="me-20 wh-70 rounded-circle bg-opacity-primary"
-                                    src="{{ asset('assets/img/ugl6.png') }}" alt="author">
-                                <div>
-                                    <a href="application-ui.html">
-                                        <h6 class="mt-0  fw-500">Dashboard UI</h6>
-                                    </a>
-                                    <p class="fs-13 color-light mb-0">San Francisco, CA</p>
-                                </div>
-                            </div>
-                            <div class="mt-n15">
-                                <div class="dropdown dropdown-click">
-                                    <button class="btn-link border-0 bg-transparent p-0" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <img src="{{ asset('assets/img/svg/more-horizontal.svg') }}"
-                                            alt="more-horizontal" class="svg">
-                                    </button>
-                                    <div class="dropdown-default dropdown-bottomLeft dropdown-menu-right dropdown-menu">
-                                        <a class="dropdown-item" href="#">view</a>
-                                        <a class="dropdown-item" href="#">edit</a>
-                                        <a class="dropdown-item" href="#">leave</a>
-                                        <a class="dropdown-item" href="#">delete</a>
+
+                                    <div class="modal-info-text">
+                                        <h6>Do you Want to delete group {{ $group->group_name }}?</h6>
                                     </div>
+
                                 </div>
                             </div>
-                        </div>
-                        <div class="user-group-people">
-                            <p class="mt-15">Lorem ipsum dolor amet, consetetur sadipscing elitr sed diam nonumy eirmod
-                                dolor ame.</p>
-                            <ul class="d-flex flex-wrap mb-20 user-group-people__parent">
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm1.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm2.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm3.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm4.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm5.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm6.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm1.png') }}" alt="author"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img class="rounded-circle wh-34 bg-opacity-secondary"
-                                            src="{{ asset('assets/img/tm2.png') }}" alt="author"></a>
-                                </li>
-                            </ul>
+                            <div class="modal-footer">
+
+                                <button type="button" class="btn btn-danger btn-outlined btn-sm"
+                                    data-bs-dismiss="modal">No</button>
+                                <button type="button" class="btn btn-success btn-outlined btn-sm delete"
+                                    data-bs-dismiss="modal" data-id="{{ $group->id }}">Yes</button>
+
+                            </div>
                         </div>
                     </div>
-                    <div class="user-group-project">
-                        <div class="d-flex justify-content-between user-group-progress-top">
-                            <div>
-                                <span class="color-light fs-12">Current project</span>
-                                <p class="fs-14 fw-500 color-dark mb-0">Plugin Development</p>
-                            </div>
-                            <div>
-                                <span class="color-light fs-12">Project Completed</span>
-                                <p class="fs-16 fw-500 color-success mb-0 text-end">45</p>
-                            </div>
-                        </div>
-                        <div class="user-group-progress-bar">
-                            <div class="progress-wrap d-flex align-items-center ">
-                                <div class="progress">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 30%;"
-                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <span class="progress-percentage">30%</span>
-                            </div>
-                            <p class="color-light fs-12 mb-0">12 / 15 tasks completed</p>
-                        </div>
-                    </div>
+
+
                 </div>
-            </div>
-       
-          
+            @endforeach
+
         </div>
-     
-    </div>
-@endsection
+    @endsection
+    @push('scripts')
+        <script>
+            $('.update_group').each(function() {
+                $(this).click(function() {
+                    let id = $(this).data('id');
+                    let name = $('.name-group-' + id).val();
+                    if (name == "") {
+                        $('.validate-group-' + id).text("Please enter group name")
+                    } else $('.validate-group-' + id).text("")
+                    let deleted_at = $(`input[name="radio-optional-group-${id}"]:checked`).val();
+                    let csrf = '{{ csrf_token() }}';
+                    $.ajax({
+                        url: `{{ URL::to('dashboard/groups/${id}') }}`,
+                        type: 'PATCH',
+                        data: {
+                            group_name: name,
+                            deleted_at: deleted_at,
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': csrf
+                        },
+                        success: function(response) {
+                            if (response) {
+                                btnSuccess.click()
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 1000);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                })
+            })
+
+            $('.delete').each(function() {
+                $(this).click(function() {
+                    let id = $(this).data('id');
+                    let csrf = '{{ csrf_token() }}';
+                    $.ajax({
+                        url: `{{ URL::to('dashboard/groups/${id}') }}`,
+                        type: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': csrf
+                        },
+                        success: function(response) {
+
+                            if (response) {
+                                btnSuccess.click()
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 1000);
+                            } else {
+                                btnWarning.click()
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                })
+            })
+
+            $('.add-group').click(function() {
+                let inputName = $(".name-group").val();
+                let csrf = '{{ csrf_token() }}';
+                $.ajax({
+                    url: `{{ URL::to('dashboard/groups') }}`,
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': csrf
+                    },
+                    data: {
+                        group_name: inputName,
+                    },
+                    success: function(response) {
+
+                        if (response) {
+                            console.log(response);
+                            if (!response.success) {
+                                $(".validate-add-group").text(response.data.group_name[0])
+                            } else {
+                                $(".validate-add-group").text("")
+                                btnSuccess.click()
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 1000);
+                            }
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
+                });
+            })
+        </script>
+    @endpush

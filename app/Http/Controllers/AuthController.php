@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\Welcome;
+use App\Jobs\SendMailWelcome;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -44,7 +43,7 @@ class AuthController extends Controller
         $this->userService->create($credentials);
         Auth::attempt($credentials);
         $request->session()->regenerate();
-        Mail::to($request->email)->send(new Welcome());
+        SendMailWelcome::dispatch($request->email)->delay(now()->addSeconds(5));
         return redirect()->intended('dashboard');
     }
     public function logout(Request $request)
