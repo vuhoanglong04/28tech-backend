@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UsersRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use App\Services\Interfaces\UserServiceInterface;
 use App\Services\Interfaces\GroupsServiceInterface;
@@ -25,7 +26,10 @@ class UsersController extends Controller
     }
     public function index()
     {
-        $users = $this->userService->all();
+        if (!Gate::allows('users.view')) {
+            abort(404);
+        }
+        $users = $this->userService->paginate();
         $groups = $this->groupService->all();
         // dd($users);
         return view('users.index', compact('users', 'groups'));

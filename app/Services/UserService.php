@@ -22,6 +22,10 @@ class UserService implements UserServiceInterface
     }
     public function all()
     {
+        return $this->model->withTrashed()->orderBy('id', 'desc')->get();
+    }
+    public function paginate()
+    {
         return $this->model->withTrashed()->orderBy('id', 'desc')->paginate(5);
     }
     public function find($id)

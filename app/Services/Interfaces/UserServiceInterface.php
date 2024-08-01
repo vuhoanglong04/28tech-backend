@@ -9,6 +9,8 @@ namespace App\Services\Interfaces;
 interface UserServiceInterface
 {
     public function all();
+    public function paginate();
+
     public function find($id);
     public function create(array $data);
     public function update($id, array $data);

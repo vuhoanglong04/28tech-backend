@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/variables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.min.css') }}">
-
+ 
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/favicon.png') }}">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.0/css/line.css">
 </head>
@@ -1256,7 +1256,7 @@
                         <li class="has-child">
                             <a href="#" class="">
                                 <span class="nav-icon uil uil-books"></span>
-                                <span class="menu-text">Learning App</span>
+                                <span class="menu-text">Courses</span>
                                 <span class="toggle-icon"></span>
                             </a>
                             <ul>
@@ -1269,6 +1269,60 @@
                                 <li class="">
                                     <a href="{{ route('admin.courses.create') }}">Create Course</a>
                                 </li>
+                            </ul>
+                        </li>
+                        <li class="has-child">
+                            <a href="#" class="">
+                                <span class="nav-icon uil uil-bag"></span>
+                                <span class="menu-text">Classes</span>
+                                <span class="toggle-icon"></span>
+                            </a>
+                            <ul>
+                                <li class="">
+                                    <a href="{{ route('admin.classes.index') }}">Classes</a>
+                                </li>
+                                <li class="">
+                                    <a href="{{ route('admin.classes.create') }}">Create Class</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="has-child">
+                            <a href="#" class="">
+                                <span class="nav-icon la la-gift"></span>
+                                <span class="menu-text">Vouchers</span>
+                                <span class="toggle-icon"></span>
+                            </a>
+                            <ul>
+                                <li class="">
+                                    <a href="{{ route('admin.vouchers.index') }}">Vouchers List</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="has-child">
+                            <a href="#" class="">
+                                <span class="nav-icon uil uil-image"></span>
+                                <span class="menu-text">Banners</span>
+                                <span class="toggle-icon"></span>
+                            </a>
+                            <ul>
+                                <li class="">
+                                    <a href="{{ route('admin.banners.index') }}">All Banners</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="has-child">
+                            <a href="#" class="">
+                                <span class="nav-icon la la-shopping-bag"></span>
+                                <span class="menu-text">Orders</span>
+                                <span class="toggle-icon"></span>
+                            </a>
+                            <ul>
+                                <li class="">
+                                    <a href="{{ route('admin.orders.index') }}">Orders List</a>
+                                </li>
+
                             </ul>
                         </li>
                     </ul>
@@ -1344,6 +1398,7 @@
     <script src="{{ asset('assets/js/script.min.js') }}"></script>
     <script src="{{ asset('js/app.min.js') }}"></script>
     <script src="https://kit.fontawesome.com/dc265cc9f9.js" crossorigin="anonymous"></script>
+ 
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 </body>
 <script>

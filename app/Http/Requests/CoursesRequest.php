@@ -21,17 +21,26 @@ class CoursesRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            "course_name" => "required|unique:courses,course_name",
+        $rules = [
+            "course_name" => "required",
             "price" => "required|numeric|min:1",
             "discount" => "required|numeric|min:1",
             "category_id" => "required",
             "description" => "required",
             "overview" => "required",
-            "image" => "required|mimes:jpeg,png,jpg|max:5120",
-            "background" => "required|mimes:jpeg,png,jpg|max:5120",
             "number_of_sessions" => "required|numeric|min:1"
         ];
+
+        if ($this->isMethod('post')) {
+            $rules["course_name"] .= "|unique:courses,course_name";
+            $rules["image"] = "required|mimes:jpeg,png,jpg|max:5120";
+            $rules["background"] = "required|mimes:jpeg,png,jpg|max:5120";
+        } elseif ($this->isMethod('patch')) {
+            $rules["image"] = "nullable|mimes:jpeg,png,jpg|max:5120";
+            $rules["background"] = "nullable|mimes:jpeg,png,jpg|max:5120";
+        }
+
+        return $rules;
     }
 
     public function messages(): array

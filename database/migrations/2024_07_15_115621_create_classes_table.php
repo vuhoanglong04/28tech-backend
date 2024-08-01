@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('class_name');
             $table->integer('course_id')->unsigned();
             $table->integer('teacher_id')->unsigned();
-            $table->timestamp('date_start');
+            $table->date('date_start');
             $table->string('time_study');
             $table->string('schedule');
             $table->softDeletes();

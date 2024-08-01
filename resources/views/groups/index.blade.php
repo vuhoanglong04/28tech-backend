@@ -101,7 +101,8 @@
                                             <a type="button" class="dropdown-item" data-bs-toggle="modal"
                                                 data-bs-target="#modal-info-delete-group-{{ $group->id }}">Delete</a>
 
-                                            <a class="dropdown-item" href="#">authorization</a>
+                                            <a class="dropdown-item"
+                                                href="{{ route('admin.groups.show', $group->id) }}">authorization</a>
                                         </div>
                                     </div>
                                 </div>

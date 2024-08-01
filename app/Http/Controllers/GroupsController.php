@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Modules;
 use Illuminate\Http\Request;
 use App\Http\Requests\GroupsRequest;
 use Illuminate\Support\Facades\Validator;
@@ -66,7 +67,8 @@ class GroupsController extends Controller
     public function show(string $id)
     {
         $group = $this->groupsService->find($id);
-        return view('groups.detail', compact('group'));
+        $modules = Modules::all();
+        return view('groups.detail', compact('group', 'modules'));
     }
 
     /**
@@ -82,7 +84,11 @@ class GroupsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return $this->groupsService->update($id, $request->all());
+        if ($request->permissions) {
+            $this->groupsService->update($id, $request->all());
+            return back()->with('success', "OK");
+        } else
+            return $this->groupsService->update($id, $request->all());
 
     }
 

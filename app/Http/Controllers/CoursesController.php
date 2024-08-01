@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CoursesRequest;
 use App\Services\Interfaces\CategoriesServiceInterface;
 use App\Services\Interfaces\CoursesServiceInterface;
+use App\Services\Interfaces\UserReviewsServiceInterface;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 
@@ -14,17 +15,22 @@ class CoursesController extends Controller
     protected $categoriesService;
     protected $coursesService;
     protected $cloudinaryImage;
+    protected $userReviewsService;
 
-    public function __construct(CoursesServiceInterface $coursesService, CategoriesServiceInterface $categoriesService, Cloudinary $cloudinaryImage)
-    {
+    public function __construct(
+        CoursesServiceInterface $coursesService,
+        CategoriesServiceInterface $categoriesService,
+        Cloudinary $cloudinaryImage,
+        UserReviewsServiceInterface $userReviewsService
+    ) {
         $this->coursesService = $coursesService;
         $this->categoriesService = $categoriesService;
         $this->cloudinaryImage = $cloudinaryImage;
-
+        $this->userReviewsService = $userReviewsService;
     }
     public function index()
     {
-        $courses = $this->coursesService->all();
+        $courses = $this->coursesService->paginate();
         return view("courses.index", compact('courses'));
     }
 
@@ -69,7 +75,9 @@ class CoursesController extends Controller
     public function show(string $id)
     {
         $course = $this->coursesService->find($id);
-        return view('courses.detail', compact('course'));
+        $categories = $this->categoriesService->all();
+        $reviews = $this->userReviewsService->findByCourse($id);
+        return view('courses.detail', compact('course', 'categories', 'reviews'));
     }
 
     /**
@@ -77,7 +85,10 @@ class CoursesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $course = $this->coursesService->find($id);
+        $categories = $this->categoriesService->all();
+
+        return view('courses.edit', compact('course', 'categories'));
     }
 
     /**
@@ -85,7 +96,35 @@ class CoursesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $input = $request->all();
+        if (
+            $request->lessons || $request->delete_lessons || $request->update_lesson || $request->delete_section
+            || $request->change_name_lesson
+        ) {
+            return $this->coursesService->update($id, $input);
+
+        } else {
+            $this->validate($request, app(CoursesRequest::class)->rules());
+            if ($request->hasFile('image')) {
+                Cloudinary::destroy($this->coursesService->find($id)->image_public_id);
+                $this->cloudinaryImage = $request->file('image')->storeOnCloudinary('courses');
+                $urlImage = $this->cloudinaryImage->getSecurePath();
+                $image_public_id = $this->cloudinaryImage->getPublicId();
+                $input["image"] = $urlImage;
+                $input["image_public_id"] = $image_public_id;
+            }
+            if ($request->hasFile('background')) {
+                Cloudinary::destroy($this->coursesService->find($id)->background_public_id);
+                $this->cloudinaryImage = $request->file('background')->storeOnCloudinary('courses');
+                $urlBackground = $this->cloudinaryImage->getSecurePath();
+                $background_public_id = $this->cloudinaryImage->getPublicId();
+                $input["background"] = $urlBackground;
+                $input["background_public_id"] = $background_public_id;
+            }
+            $this->coursesService->update($id, $input);
+            return redirect()->route('admin.courses.show', $id);
+        }
+
     }
 
     /**
@@ -93,16 +132,21 @@ class CoursesController extends Controller
      */
     public function destroy(string $id)
     {
+
         return $this->coursesService->delete($id);
     }
 
     public function restore(string $id)
     {
-        //
+
+        return $this->coursesService->restore($id);
     }
 
     public function forceDelete(string $id)
     {
-        //
+
+
+        return $this->coursesService->forceDelete($id);
+
     }
 }
