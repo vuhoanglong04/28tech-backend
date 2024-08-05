@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone_number');
+            $table->string('phone_number')->nullable();
             $table->string('password');
             $table->text('image')->default('https://cdn.icon-icons.com/icons2/2438/PNG/512/boy_avatar_icon_148455.png');
             $table->integer('group_id')->default(1)->unsigned();

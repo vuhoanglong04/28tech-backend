@@ -30,6 +30,7 @@ class CoursesController extends Controller
     }
     public function index()
     {
+       
         $courses = $this->coursesService->paginate();
         return view("courses.index", compact('courses'));
     }
@@ -106,7 +107,8 @@ class CoursesController extends Controller
         } else {
             $this->validate($request, app(CoursesRequest::class)->rules());
             if ($request->hasFile('image')) {
-                Cloudinary::destroy($this->coursesService->find($id)->image_public_id);
+                if ($this->coursesService->find($id)->image_public_id)
+                    // Cloudinary::destroy($this->coursesService->find($id)->image_public_id);
                 $this->cloudinaryImage = $request->file('image')->storeOnCloudinary('courses');
                 $urlImage = $this->cloudinaryImage->getSecurePath();
                 $image_public_id = $this->cloudinaryImage->getPublicId();
@@ -114,7 +116,8 @@ class CoursesController extends Controller
                 $input["image_public_id"] = $image_public_id;
             }
             if ($request->hasFile('background')) {
-                Cloudinary::destroy($this->coursesService->find($id)->background_public_id);
+                if ($this->coursesService->find($id)->background_public_id)
+                    Cloudinary::destroy($this->coursesService->find($id)->background_public_id);
                 $this->cloudinaryImage = $request->file('background')->storeOnCloudinary('courses');
                 $urlBackground = $this->cloudinaryImage->getSecurePath();
                 $background_public_id = $this->cloudinaryImage->getPublicId();
@@ -144,9 +147,7 @@ class CoursesController extends Controller
 
     public function forceDelete(string $id)
     {
-
-
+        return $id;
         return $this->coursesService->forceDelete($id);
-
     }
 }

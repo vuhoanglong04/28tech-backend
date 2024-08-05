@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('voucher_code');
+            $table->string('voucher_code')->nullable();
             $table->integer('total');
             $table->string('payment_gate');
             $table->tinyInteger('status');

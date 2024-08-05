@@ -3,131 +3,162 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\User;
-use App\Mail\SignUpMail;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-use Laravel\Socialite\Facades\Socialite;
+use App\Rules\VietnamesePhoneNumber;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use App\Services\Interfaces\UserServiceInterface;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class AuthController extends Controller
 {
+
+    protected $userService;
+    public function __construct(UserServiceInterface $userService)
+    {
+        $this->userService = $userService;
+    }
     public function register(Request $request)
     {
-        try {
-            $validator = Validator::make($request->all(), [
-                'full_name' => 'required',
-                'email' => "required | email:rfc,dns | unique:users,email",
-                'password' => "required | min:5",
-            ], [
-                'full_name.required' => 'Please enter your full name',
-                'email.required' => "Please enter your email address",
-                'email.email' => "Email is not valid",
-                'email.unique' => "Email already exists",
-                "password.required" => "Please enter your password",
-                "password.min" => "Password must be at least :min characters",
-            ]);
-            if ($validator->fails()) {
-                $arr = [
-                    'success' => false,
-                    'status' => 500,
-                    'message' => 'Validation failed',
-                    'data' => $validator->errors()
-                ];
-                return response()->json($arr, 500);
-            }
-
-            $user = new User();
-            $user->email = $request->email;
-            $user->password = $request->password;
-            $user->save();
-            $tokenResult = $user->createToken('authToken')->plainTextToken;
-            $arr = [
-                'status' => 201,
-                'message' => "Register sucessfully",
-                'access_token' => $tokenResult,
-                'token_type' => 'Bearer',
-                'data' => $user
-            ];
-            return response()->json($arr, 201);
-
-        } catch (\Exception $error) {
-            return response()->json([
-                'status' => 500,
-                'message' => 'Error!',
-                'error' => $error,
-            ]);
+        // Validate the request data
+        $validator = Validator::make($request->all(), [
+            "name" => "required",
+            "email" => "required|email:rfc,dns",
+            "password" => "required|min:5",
+            "phone_number" => ["required", new VietnamesePhoneNumber],
+        ], [
+            "name.required" => "Your full name is required",
+            "email.required" => "Email is required",
+            "email.email" => "Email is not valid",
+            "password.required" => "Password is required",
+            "password.min" => "Password must be at least :min characters",
+            "phone_number.required" => "Phone number is required",
+        ]);
+    
+        // If validation fails, return the validation errors
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
         }
+    
+        // Create the user
+        $user = $this->userService->create($request->all());
+    
+        // Ensure the user was created successfully
+        if (!$user) {
+            return response()->json(['error' => 'User creation failed'], 500);
+        }
+    
+        // Attempt to create a token for the user
+        try {
+            // Generate token using email and password
+            $credentials = [
+                'email' => $request->input('email'),
+                'password' => $request->input('password')
+            ];
+    
+            $token = JWTAuth::attempt($credentials);
+    
+            if (!$token) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+    
+            // Generate refresh token if needed
+            // (Note: Refresh tokens are usually handled differently and might not be needed here)
+            $refreshToken = JWTAuth::claims(['refresh' => true])->attempt($credentials);
+        } catch (\Exception $e) {
+            // Log the exception for debugging
+            \Log::error('JWT Token creation failed', ['error' => $e->getMessage()]);
+            return response()->json(['error' => 'Token creation failed'], 500);
+        }
+    
+        // Return the user data and tokens
+        return response()->json('', 201);
     }
+    
+    
 
     public function login(Request $request)
     {
 
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email:rfc,dns',
+            'password' => 'required|min:5',
+        ], [
+            'email.required' => 'Email is required',
+            'email.email' => 'Email is not valid',
+            'password.required' => 'Password is required',
+            'password.min' => 'Password must be at least :min characters',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $credentials = $request->only('email', 'password');
+
         try {
-            $validator = Validator::make($request->all(), [
-                'email' => "required | email:rfc,dns",
-                'password' => "required | min:5",
-            ], [
-                'email.required' => "Email must be required",
-                'email.email' => "Email is not valid",
-                "password.required" => "Password must be required",
-                "password.min" => "Password must be at least :min characters",
-            ]);
-
-            if ($validator->fails()) {
-                $arr = [
-                    'success' => false,
-                    'status' => 500,
-                    'message' => 'Validation failed',
-                    'data' => $validator->errors()
-                ];
-                return response()->json($arr, 500);
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'Invalid credentials'], 401);
             }
+            // Tạo refresh token
+            $refreshToken = JWTAuth::claims(['refresh' => true])->attempt($credentials);
 
-            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-                $user = User::find(Auth::user()->id);
-                $user->is_online = 1;
-                $user->save();
-                $user->tokens()->delete();
-                $tokenResult = $user->createToken('authToken')->plainTextToken;
-                return response()->json([
-                    'status_code' => 200,
-                    'access_token' => $tokenResult,
-                    'token_type' => 'Bearer',
-                ]);
-            } else {
-                return response()->json([
-                    'status_code' => 500,
-                    'message' => 'Wrong password or email'
-                ]);
-            }
+            return response()->json(compact('token', 'refreshToken'));
 
-        } catch (\Exception $error) {
-            return response()->json([
-                'status' => 500,
-                'message' => 'Error!',
-                'error' => $error,
-            ]);
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'Could not create token', 'exception' => $e->getMessage()], 500);
         }
     }
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
-        return response()->json([
-            'status' => 200,
-            'message' => 'Logout successfully!',
-        ]);
+        try {
+            $token = JWTAuth::getToken();
+
+            if (!$token) {
+                return response()->json(['error' => 'Token not provided'], 400);
+            }
+
+            JWTAuth::invalidate($token);
+
+            return response()->json(['message' => 'Successfully logged out']);
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'Failed to logout'], 500);
+        }
     }
 
-    public function loginGoogle()
+    public function refresh(Request $request)
     {
-        config(['services.google.redirect' => env('GOOGLE_REDIRECT_USER')]);
-        $redirectResponse = Socialite::driver('google')->stateless()->redirect();
-        $redirectUrl = $redirectResponse->getTargetUrl();
-
-        return response()->json(['redirect_url' => $redirectUrl]);
+        try {
+            $token = JWTAuth::refresh(JWTAuth::getToken());
+            return response()->json([
+                'access_token' => $token,
+                'token_type' => 'bearer',
+                'expires_in' => JWTAuth::factory()->getTTL() * 60
+            ]);
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'Could not refresh token', 'exception' => $e->getMessage()], 500);
+        }
     }
-   
+
+    public function getUser(Request $request)
+    {
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['error' => 'User not found'], 404);
+            }
+        } catch (TokenExpiredException $e) {
+            return response()->json(['error' => 'Token has expired'], 401);
+        } catch (TokenInvalidException $e) {
+            return response()->json(['error' => 'Token is invalid'], 401);
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'Token absent'], 401);
+        }
+
+        return response()->json(compact('user'));
+    }
 }

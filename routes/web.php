@@ -23,6 +23,11 @@ use App\Http\Controllers\DashboardController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+//google
+Route::get('auth/google' , [AuthController::class ,'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback' , [AuthController::class ,'handleGoogle'])->name('auth.google.callback');
+
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'handleLogin'])->name('login');

@@ -1,37 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use Carbon\Carbon;
-use App\Models\User;
-use App\Models\Orders;
-use App\Models\Courses;
+use App\Models\UserReviews;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class DashboardController extends Controller
+class ReviewsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $title="Dashboard";
-        $courses = Courses::all();
-        $orders = Orders::all();
-        $totalRevenue =  0 ; 
-        foreach($orders as $order) $totalRevenue += $order->total;
-        $users  =  User::all();
-        $monthlyRevenue = [];
 
-    for ($i = 1; $i <= 12; $i++) {
-        $monthlyRevenue[$i] = 0;
-    }
-
-    foreach ($orders as $order) {
-        $month = Carbon::parse($order->created_at)->month;
-        $monthlyRevenue[$month] += $order->total; 
-    }
-        return view('dashboard' , compact('title' , 'courses' , 'orders' , 'totalRevenue' ,'users' , 'monthlyRevenue'));
     }
 
     /**
@@ -47,7 +29,9 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    
+        $review = UserReviews::create($request->all());
+        return response()->json(["data"=>$review] , 201);
     }
 
     /**

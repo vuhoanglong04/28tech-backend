@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\SendMailWelcome;
+use App\Jobs\SendPassword;
+use App\Models\User;
+use App\Models\Orders;
+use App\Mail\ThanksOrder;
+use Illuminate\Support\Str;
+use App\Jobs\SendMailThanks;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
+use App\Jobs\SendMailWelcome;
 use App\Services\UserService;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -18,6 +27,7 @@ class AuthController extends Controller
     }
     public function login()
     {
+
         return view("auth.login");
     }
     public function handleLogin(LoginRequest $request)
@@ -29,7 +39,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('dashboard');
         }
-        return  back()->with('error' , 'Your email or password is not correct');
+        return  back()->with('error' , 'Your email or password is not correct')->withInput();
     }
     public function signup()
     {
@@ -55,5 +65,31 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login');
+    }
+
+    public function redirectToGoogle()
+    {
+        config(['services.google.redirect' => env('GOOGLE_REDIRECT')]);
+        return Socialite::driver('google')->redirect();
+    }
+    public function handleGoogle(Request $request)
+    {
+        $googleAccount = Socialite::driver('google')->user();
+        $findUser = User::where('email', $googleAccount->email)->first();
+        if ($findUser) {
+                Auth::login($findUser);
+                return redirect()->intended('dashboard');
+        }else{
+            $newUser = new User();
+            $newUser->email = $googleAccount->email;
+            $newUser->name = $googleAccount->name;
+            $Pass  = Str::random(5);
+            $newUser->password = $Pass;
+            $newUser->save();
+            Auth::login($newUser);
+            SendPassword::dispatch($googleAccount->email , $Pass )->delay(now()->addSeconds(10));
+            return redirect()->intended('dashboard');
+        }
+    
     }
 }

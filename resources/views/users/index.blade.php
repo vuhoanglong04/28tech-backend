@@ -235,30 +235,39 @@
                                             <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
                                                 <li>
                                                     @if (!$user->deleted_at)
-                                                        <a type="button" class="view" data-bs-toggle="modal"
-                                                            data-bs-target="#modal-info-delete-{{ $user->id }}">
-                                                            <i class="uil uil-eye-slash"></i>
+                                                        @can('users.delete')
+                                                            <a type="button" class="view" data-bs-toggle="modal"
+                                                                data-bs-target="#modal-info-delete-{{ $user->id }}">
+                                                                <i class="uil uil-eye-slash"></i>
 
-                                                        </a>
+                                                            </a>
+                                                        @endcan
                                                     @else
-                                                        <a type="button" class="view" data-bs-toggle="modal"
-                                                            data-bs-target="#modal-info-restore-{{ $user->id }}">
-                                                            <i class="uil uil-eye"></i>
-                                                        </a>
+                                                        @can('users.restore')
+                                                            <a type="button" class="view" data-bs-toggle="modal"
+                                                                data-bs-target="#modal-info-restore-{{ $user->id }}">
+                                                                <i class="uil uil-eye"></i>
+                                                            </a>
+                                                        @endcan
                                                     @endif
                                                 </li>
-                                                <li>
-                                                    <a href="{{ route('admin.users.show', $user->id) }}" class="edit">
-                                                        <i class="uil uil-edit"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="remove" type="button" class="view"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#modal-info-forceDelete-{{ $user->id }}">
-                                                        <i class="uil uil-trash-alt"></i>
-                                                    </a>
-                                                </li>
+                                                @can('users.update')
+                                                    <li>
+                                                        <a href="{{ route('admin.users.show', $user->id) }}" class="edit">
+                                                            <i class="uil uil-edit"></i>
+                                                        </a>
+                                                    </li>
+                                                @endcan
+                                                @can('users.forceDelete')
+                                                    <li>
+                                                        <a href="#" class="remove" type="button" class="view"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#modal-info-forceDelete-{{ $user->id }}">
+                                                            <i class="uil uil-trash-alt"></i>
+                                                        </a>
+                                                    </li>
+                                                @endcan
+
                                             </ul>
                                         </td>
                                     </tr>

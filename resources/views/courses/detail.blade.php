@@ -599,7 +599,7 @@
                 <div class="card-body pb-10">
                     <div class="reply-editor media">
                         <div class="reply-editor__author">
-                            <img src="{{ Auth::user()->image }}" class="bg-opacity-primary d-flex"
+                            <img src="{{ Auth::user()->image ?? '' }}" class="bg-opacity-primary d-flex"
                                 alt="Reply Editor Author">
                         </div>
 

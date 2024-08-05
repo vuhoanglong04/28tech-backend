@@ -10,11 +10,7 @@ class Orders extends Model
     use HasFactory;
     protected $fillable=[
         "user_id",
-        "receiver_name",
-        "contact_phone",
-        "address",
         "voucher_code",
-        "delivery_id",
         "total",
         'payment_gate',
         "status"
@@ -27,8 +23,9 @@ class Orders extends Model
     {
         return $this->belongsTo(Vouchers::class, 'voucher_code', 'code');
     }
-    public function delivery()
+    public function reviews()
     {
-        return $this->belongsTo(Deliveries::class, 'delivery_id', 'id');
+        return $this->hasManyThrough(UserReviews::class, OrderDetails::class, 'order_id', 'order_detail_id');
     }
+   
 }

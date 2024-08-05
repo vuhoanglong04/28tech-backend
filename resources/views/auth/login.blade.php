@@ -105,11 +105,13 @@
                                     <div class="button-group d-flex align-items-center justify-content-center">
                                         <ul class="admin-socialBtn">
                                             <li>
-                                                <button class="btn text-dark google">
-                                                    <img class="svg"
-                                                        src="{{ asset('assets/img/google-Icon.svg') }}"
-                                                        alt="img" />
-                                                </button>
+                                                <a href="{{route('auth.google')}}">
+                                                    <button class="btn text-dark google">
+                                                        <img class="svg"
+                                                            src="{{ asset('assets/img/google-Icon.svg') }}"
+                                                            alt="img" />
+                                                    </button>
+                                                </a>
                                             </li>
                                             <li>
                                                 <button class=" radius-md wh-48 content-center facebook">

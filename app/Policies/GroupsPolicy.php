@@ -3,14 +3,9 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\users;
-use Illuminate\Auth\Access\Response;
 
-class UsersPolicy
+class GroupsPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
     public function viewAny(User $user)
     {
         //
@@ -21,7 +16,7 @@ class UsersPolicy
      */
     public function view(User $user): bool
     {
-        return $user->hasPermission('users', 'view');
+        return $user->hasPermission('groups', 'view');
     }
 
     /**
@@ -29,7 +24,7 @@ class UsersPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermission('users', 'add');
+        return $user->hasPermission('groups', 'add');
 
     }
 
@@ -38,7 +33,7 @@ class UsersPolicy
      */
     public function update(User $user): bool
     {
-        return $user->hasPermission('users', 'edit');
+        return $user->hasPermission('groups', 'edit');
 
     }
 
@@ -47,7 +42,7 @@ class UsersPolicy
      */
     public function delete(User $user): bool
     {
-        return $user->hasPermission('users', 'delete');
+        return $user->hasPermission('groups', 'delete');
 
     }
 
@@ -56,7 +51,7 @@ class UsersPolicy
      */
     public function restore(User $user): bool
     {
-        return $user->hasPermission('users', 'restore');
+        return $user->hasPermission('groups', 'restore');
 
     }
 
@@ -65,7 +60,7 @@ class UsersPolicy
      */
     public function forceDelete(User $user): bool
     {
-        return $user->hasPermission('users', 'forceDelete');
+        return $user->hasPermission('groups', 'forceDelete');
 
     }
 }

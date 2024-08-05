@@ -1,37 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use Carbon\Carbon;
-use App\Models\User;
-use App\Models\Orders;
+use App\Models\Classes;
 use App\Models\Courses;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class DashboardController extends Controller
+class CoursesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $title="Dashboard";
-        $courses = Courses::all();
-        $orders = Orders::all();
-        $totalRevenue =  0 ; 
-        foreach($orders as $order) $totalRevenue += $order->total;
-        $users  =  User::all();
-        $monthlyRevenue = [];
-
-    for ($i = 1; $i <= 12; $i++) {
-        $monthlyRevenue[$i] = 0;
-    }
-
-    foreach ($orders as $order) {
-        $month = Carbon::parse($order->created_at)->month;
-        $monthlyRevenue[$month] += $order->total; 
-    }
-        return view('dashboard' , compact('title' , 'courses' , 'orders' , 'totalRevenue' ,'users' , 'monthlyRevenue'));
+        if ($request->category) {
+            $courses = Courses::where('category_id', $request->category)->with('review')->with('category')->get();
+        } else
+            $courses = Courses::with('review')->get();
+        return response()->json($courses);
     }
 
     /**
@@ -53,9 +40,13 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        //
+
+        $course = Courses::where('slug', $slug)->with('review')->with('category')->first();
+        $classes = Classes::where('course_id', $course->id)->with('user')->get();
+        return response()->json([$course, $classes]);
+
     }
 
     /**

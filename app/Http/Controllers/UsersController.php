@@ -103,6 +103,9 @@ class UsersController extends Controller
      */
     public function show(string $id)
     {
+        if (!Gate::allows('users.update')) {
+            abort(404);
+        }
         $user = $this->userService->find($id);
         $groups = $this->groupService->all();
 

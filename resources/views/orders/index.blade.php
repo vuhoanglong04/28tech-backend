@@ -191,19 +191,18 @@
                                                 {{ $order->payment_gate }}
                                             </div>
                                         </td>
-                                        <td>
-                                            <div class="userDatatable-content">
-                                                {{ $order->delivery->delivery_name }}
-                                            </div>
-                                        </td>
+
                                         <td>
                                             <div class="userDatatable-content d-inline-block">
-                                                @if (1)
+                                                @if ($order->status == 1)
                                                     <span
-                                                        class="bg-opacity-warning  color-warning rounded-pill userDatatable-content-status active">deactivete</span>
+                                                        class="bg-opacity-warning  color-warning rounded-pill userDatatable-content-status active">Cancelled</span>
+                                                @elseif($order->status == 2)
+                                                    <span
+                                                        class="bg-opacity-primary  color-primary rounded-pill userDatatable-content-status active">Pending</span>
                                                 @else
                                                     <span
-                                                        class="bg-opacity-success  color-success rounded-pill userDatatable-content-status active">active</span>
+                                                        class="bg-opacity-success  color-success rounded-pill userDatatable-content-status active">Done</span>
                                                 @endif
                                             </div>
                                         </td>

@@ -28,4 +28,12 @@ class Courses extends Model
 
 
     ];
+    public function review()
+    {
+        return $this->hasMany(UserReviews::class, 'course_id', 'id');
+    }
+    public function category()
+    {
+        return $this->belongsTo(Categories::class);
+    }
 }

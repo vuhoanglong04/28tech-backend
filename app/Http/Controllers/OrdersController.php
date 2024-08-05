@@ -61,6 +61,7 @@ class OrdersController extends Controller
      */
     public function update(Request $request, string $id)
     {
+    
         return $this->ordersService->update($id, $request->all());
     }
 

@@ -15,18 +15,19 @@
                 <div class="cus-8 col-12">
                     <div class="d-flex justify-content-end my-2">
                         <div class="dropdown dropdown-btn dropdown-hover">
-                            <button class="btn btn-outline-lighten fs-14 fw-400">
-                                Actions
-                            </button>
+                            @if ($order->status != 3)
+                                <button class="btn btn-outline-lighten fs-14 fw-400">
+                                    Actions
+                                </button>
+                            @endif
+
                             <div class="dropdown-default dropdown-bottomLeft">
                                 <button class="dropdown-item update_status" data-status="1"
                                     data-order="{{ $order->id }}">Cancelled</button>
+                                <button class="dropdown-item update_status" data-status="2"
+                                    data-order="{{ $order->id }}">Pending</button>
                                 <button class="dropdown-item update_status" data-status="3"
-                                    data-order="{{ $order->id }}">Confirm</button>
-                                <button class="dropdown-item update_status" data-status="3"
-                                    data-order="{{ $order->id }}">Shipping</button>
-                                <button class="dropdown-item update_status" data-status="4"
-                                    data-order="{{ $order->id }}">Received</button>
+                                    data-order="{{ $order->id }}">Done</button>
 
                             </div>
                         </div>
@@ -36,12 +37,10 @@
                             @if ($order->status == 1)
                                 <span class="dm-tag tag-danger ">Cancelled</span>
                             @elseif ($order->status == 2)
-                                <span class="dm-tag tag-secondary ">Waiting Confirm
+                                <span class="dm-tag tag-secondary ">Pending
                                 </span>
                             @elseif ($order->status == 3)
-                                <span class="dm-tag tag-primary ">Shipping</span>
-                            @elseif ($order->status == 4)
-                                <span class="dm-tag tag-success ">Received</span>
+                                <span class="dm-tag tag-primary ">Done</span>
                             @endif
                         </h4>
                     </div>
@@ -91,7 +90,7 @@
                                 <div class="step {{ $order->status == 2 ? 'active' : '' }}" id="2"
                                     style="box-shadow:10px 0 20px #9299b826">
                                     <span>2</span>
-                                    <span>Waiting Confirm</span>
+                                    <span>Pending</span>
                                 </div>
                                 <div class="current"><svg xmlns="http://www.w3.org/2000/svg" width="182"
                                         height="6" viewBox="0 0 182 6" class="svg replaced-svg">
@@ -137,79 +136,12 @@
                                 <div class="step {{ $order->status == 3 ? 'active' : '' }}" id="3"
                                     style="box-shadow:10px 0 20px #9299b826">
                                     <span>3</span>
-                                    <span>Shipping</span>
+                                    <span>Done</span>
                                 </div>
-                                <div class="current"><svg xmlns="http://www.w3.org/2000/svg" width="182"
-                                        height="6" viewBox="0 0 182 6" class="svg replaced-svg">
-                                        <g id="Group_1318" data-name="Group 1318" transform="translate(-441 -521)">
-                                            <circle id="Ellipse_95" data-name="Ellipse 95" cx="3" cy="3"
-                                                r="3" transform="translate(441 521)" fill="#c5cae1" opacity="0.15">
-                                            </circle>
-                                            <circle id="Ellipse_95-2" data-name="Ellipse 95" cx="3"
-                                                cy="3" r="3" transform="translate(457 521)" fill="#c5cae1"
-                                                opacity="0.2"></circle>
-                                            <circle id="Ellipse_95-3" data-name="Ellipse 95" cx="3"
-                                                cy="3" r="3" transform="translate(473 521)" fill="#c5cae1"
-                                                opacity="0.3"></circle>
-                                            <circle id="Ellipse_95-4" data-name="Ellipse 95" cx="3"
-                                                cy="3" r="3" transform="translate(489 521)" fill="#c5cae1"
-                                                opacity="0.35"></circle>
-                                            <circle id="Ellipse_95-5" data-name="Ellipse 95" cx="3"
-                                                cy="3" r="3" transform="translate(505 521)" fill="#c5cae1"
-                                                opacity="0.4"></circle>
-                                            <circle id="Ellipse_95-6" data-name="Ellipse 95" cx="3"
-                                                cy="3" r="3" transform="translate(521 521)" fill="#c5cae1"
-                                                opacity="0.5"></circle>
-                                            <circle id="Ellipse_95-7" data-name="Ellipse 95" cx="3"
-                                                cy="3" r="3" transform="translate(537 521)" fill="#c5cae1"
-                                                opacity="0.55"></circle>
-                                            <circle id="Ellipse_95-8" data-name="Ellipse 95" cx="3"
-                                                cy="3" r="3" transform="translate(553 521)" fill="#c5cae1"
-                                                opacity="0.6"></circle>
-                                            <circle id="Ellipse_95-9" data-name="Ellipse 95" cx="3"
-                                                cy="3" r="3" transform="translate(569 521)" fill="#c5cae1"
-                                                opacity="0.65"></circle>
-                                            <circle id="Ellipse_95-10" data-name="Ellipse 95" cx="3"
-                                                cy="3" r="3" transform="translate(585 521)" fill="#c5cae1"
-                                                opacity="0.7"></circle>
-                                            <circle id="Ellipse_95-11" data-name="Ellipse 95" cx="3"
-                                                cy="3" r="3" transform="translate(601 521)" fill="#c5cae1"
-                                                opacity="0.8"></circle>
-                                            <circle id="Ellipse_95-12" data-name="Ellipse 95" cx="3"
-                                                cy="3" r="3" transform="translate(617 521)" fill="#c5cae1"
-                                                opacity="0.9"></circle>
-                                        </g>
-                                    </svg></div>
-                                <div class="step {{ $order->status == 4 ? 'active' : '' }}" id="4"
-                                    style="box-shadow:10px 0 20px #9299b826">
-                                    <span>4</span>
-                                    <span>Received</span>
-                                </div>
+
                             </div>
                         </div>
-                        <div class="card-body mb-30 bg-white bg-shadow radius-xl px-sm-30 px-15 pt-25  mb-30">
-                            <div class="crc__title mb-30">
-                                <h5 class="color-gray">Shipping Information</h5> <span class="color"></span>
-                                <button type="submit"
-                                    class="border-0 crc__title-btn shadow-none bg-transparent color-info content-center fs-14">
-                                </button>
-                            </div>
-                            <div class="d-flex mb-10">
-                                <div class="radio-theme-default custom-radio   me-2">
-                                    <input class="radio" type="radio" name="radio-vertical" value="0"
-                                        id="radio-vl5" checked>
-                                    <label for="radio-vl5">
-                                        <span class="radio-text"></span>
-                                    </label>
-                                </div>
-                                <div class="check-review__contact">
-                                    <p>{{ $order->receiver_name }}<br> Phone: {{ $order->contact_phone }}</p>
-                                    <span>{{ $order->address }}</span>
-                                </div>
-                            </div>
-                            <button type="submit"
-                                class="border-0 crc__title-btn shadow-none bg-transparent color-info content-center fs-13 fw-500 p-0">
-                        </div>
+
                         <div class="card-body mb-30 bg-white bg-shadow radius-xl px-sm-30 px-15 pt-25  mb-30">
                             <div class="crc__title mb-30">
                                 <h5 class="color-gray">Payment Method</h5> <span class="color"></span>
@@ -276,15 +208,11 @@
                                                         <span> {{ \App\Helpers\NumberHelper::formatNumber($total) }}
                                                             VNĐ</span>
                                                     </div>
-                                                    <div class="shipping">
-                                                        Shipping charge:
-                                                        <span>{{ \App\Helpers\NumberHelper::formatNumber($order->delivery->fee) }}
-                                                            VNĐ</span>
-                                                    </div>
+
                                                     <div class="shipping">
                                                         Voucher:
                                                         <span>{{ $order->voucher_code }} (-
-                                                            {{ $order->voucher->discounts }}%
+                                                            {{ $order->voucher->discounts ?? 0 }}%
 
                                                             )</span>
                                                     </div>
@@ -293,7 +221,7 @@
                                                     class="total-money d-flex justify-content-between align-items-center mt-1">
                                                     <h6>Total :</h6>
                                                     <h5 class="text-primary">
-                                                        {{ \App\Helpers\NumberHelper::formatNumber($total + $order->delivery->fee - ($order->voucher->discounts * ($total + $order->delivery->fee)) / 100) }}
+                                                        {{ \App\Helpers\NumberHelper::formatNumber($total - ($order->voucher->discounts ?? 0 * $total) / 100) }}
                                                         VNĐ
                                                     </h5>
                                                 </div>

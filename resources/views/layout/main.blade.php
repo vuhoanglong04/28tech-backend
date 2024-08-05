@@ -12,9 +12,12 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/variables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.min.css') }}">
- 
+
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/favicon.png') }}">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.0/css/line.css">
+    <script src="
+                                https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js
+                                "></script>
 </head>
 
 <body class="layout-light side-menu">
@@ -155,6 +158,7 @@
                                                     <span class="menu-text">Calendar</span>
                                                 </a>
                                             </li>
+
                                             <li class="has-subMenu-left">
                                                 <a href="#" class="">
                                                     <span class="nav-icon uil uil-users-alt"></span>
@@ -168,10 +172,12 @@
                                                         <a href="users-card.html" class="">Users
                                                             Grid</a>
                                                     </li>
-                                                    <li>
-                                                        <a href="users-list.html" class="">Users
-                                                            List</a>
-                                                    </li>
+                                                    @can('users.view')
+                                                        <li>
+                                                            <a href="users-list.html" class="">Users
+                                                                List</a>
+                                                        </li>
+                                                    @endcan
                                                     <li>
                                                         <a href="users-card2.html" class="">Users
                                                             Grid
@@ -191,6 +197,7 @@
                                                     </li>
                                                 </ul>
                                             </li>
+
                                             <li class="has-subMenu-left">
                                                 <a href="#" class="">
                                                     <img src="{{ asset('assets/img/') }}/svg/user-check.svg"
@@ -1162,7 +1169,7 @@
                             <a href="javascript:;" class="nav-item-toggle"><img
                                     src="{{ asset('assets/img/') }}/author-nav.jpg" alt=""
                                     class="rounded-circle">
-                                <span class="nav-item__title">Danial<i
+                                <span class="nav-item__title">{{ Auth::user()->name ?? '' }}<i
                                         class="las la-angle-down nav-item__arrow"></i></span>
                             </a>
                             <div class="dropdown-parent-wrapper">
@@ -1173,7 +1180,7 @@
                                                 class="rounded-circle">
                                         </div>
                                         <div>
-                                            <h6>{{ Auth::user()->name }}</h6>
+                                            <h6>{{ Auth::user()->name ?? '' }}</h6>
                                         </div>
                                     </div>
                                     <div class="nav-author__options">
@@ -1247,10 +1254,14 @@
                                     <a href="{{ route('admin.groups.index') }}">Groups</a>
                                 </li>
 
-                                <li class="">
-                                    <a href="{{ route('admin.users.index') }}">Users
-                                        List</a>
-                                </li>
+
+
+                                @can('users.view')
+                                    <li class="">
+                                        <a href="{{ route('admin.users.index') }}">Users
+                                            List</a>
+                                    </li>
+                                @endcan
                             </ul>
                         </li>
                         <li class="has-child">
@@ -1398,7 +1409,7 @@
     <script src="{{ asset('assets/js/script.min.js') }}"></script>
     <script src="{{ asset('js/app.min.js') }}"></script>
     <script src="https://kit.fontawesome.com/dc265cc9f9.js" crossorigin="anonymous"></script>
- 
+
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 </body>
 <script>
