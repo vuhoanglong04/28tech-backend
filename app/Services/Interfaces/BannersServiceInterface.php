@@ -15,5 +15,4 @@ interface BannersServiceInterface
     public function delete($id);
     public function restore($id);
     public function forceDelete($id);
-
 }

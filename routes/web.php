@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\BannersController;
-use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\ClassesController;
-use App\Http\Controllers\CoursesController;
-use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\UserReviewsController;
-use App\Http\Controllers\UsersController;
-use App\Http\Controllers\VouchersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\GroupsController;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\BannersController;
+use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\VouchersController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\UserReviewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,4 +85,7 @@ Route::prefix('/dashboard')->name('admin.')->middleware('auth')->group(function 
     Route::get('reviews/restore/{review}', [UserReviewsController::class, "restore"])->name('reviews.restore');
     Route::get('reviews/forceDelete/{review}', [UserReviewsController::class, "forceDelete"])->name('reviews.forceDelete');
 
+
+    //GALLERY
+    Route::get('gallery', [GalleryController::class, "index"])->name('gallery.index');
 });

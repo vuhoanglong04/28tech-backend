@@ -1336,6 +1336,14 @@
 
                             </ul>
                         </li>
+                        <li class="">
+                            <a href="{{route('admin.gallery.index')}}" class="">
+                                <span class="nav-icon la la-image"></span>
+                                <span class="menu-text">Gallery</span>
+                                <span class="toggle-icon"></span>
+                            </a>
+          
+                        </li>
                     </ul>
                 </div>
             </div>
